@@ -50,4 +50,4 @@ jobs:
       if: ${{ matrix.os == 'windows-latest' }}
       shell: msys2 {0}
       run: |
-        fpm test --profile release --flag "-g" --c-compiler gcc
+        fpm test --profile release --flag "-g" --c-compiler gcc --verbose
