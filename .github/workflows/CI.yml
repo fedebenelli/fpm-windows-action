@@ -22,30 +22,20 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Set up MSYS2
-      if: ${{ matrix.os == 'windows-latest' }}
-      uses: msys2/setup-msys2@v2
+
+    - uses: cygwin/cygwin-install-action@master # Install Cygwin
       with:
-        msystem: MINGW64
-        update: true
-        install: >
-          git
-          unzip
-          mingw-w64-x86_64-fpm
-          mingw-w64-x86_64-gcc
-          mingw-w64-x86_64-gcc-fortran
-          mingw-w64-x86_64-gcc-libgfortran
-          mingw-w64-x86_64-lapack
+        packages: git make gcc gcc-fortran lapack
 
     - name: Run a single file
       if: ${{ matrix.os == 'windows-latest' }}
-      shell: msys2 {0}
+      shell: bash
       run: |
         gfortran single.f90 -o run && ./run
 
     - name: Install fpm
       if: ${{ matrix.os == 'windows-latest' }}
-      shell: msys2 {0}
+      shell: bash
       run: |
         wget https://github.com/fortran-lang/fpm/archive/refs/heads/main.zip
         unzip main.zip
@@ -55,6 +45,6 @@ jobs:
 
     - name: Run with fpm
       if: ${{ matrix.os == 'windows-latest' }}
-      shell: msys2 {0}
+      shell: bash
       run: |
         fpm test
