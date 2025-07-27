@@ -10,6 +10,7 @@ jobs:
       matrix:
         os: [windows-latest]
         python-version: [3.9]
+        sys: [x86_64]
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -25,15 +26,16 @@ jobs:
       if: ${{ matrix.os == 'windows-latest' }}
       uses: msys2/setup-msys2@v2
       with:
-        msystem: UCRT64
+        msystem: ${{ matrix.sys }}
         update: true
         install: >
           git
           unzip
-          mingw-w64-ucrt-x86_64-gcc
-          mingw-w64-ucrt-x86_64-gcc-fortran
-          mingw-w64-ucrt-x86_64-gcc-libgfortran
-          mingw-w64-ucrt-x86_64-lapack
+          mingw-w64-x86_64-fpm
+          mingw-w64-x86_64-gcc
+          mingw-w64-x86_64-gcc-fortran
+          mingw-w64-x86_64-gcc-libgfortran
+          mingw-w64-x86_64-lapack
 
     - name: Run a single file
       if: ${{ matrix.os == 'windows-latest' }}
