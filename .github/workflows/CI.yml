@@ -32,18 +32,27 @@ jobs:
         update: true
         install: >
           git
-          mingw-w64-ucrt-x86_64-fpm
           mingw-w64-ucrt-x86_64-gcc-fortran
           mingw-w64-ucrt-x86_64-gcc-libgfortran
           mingw-w64-ucrt-x86_64-lapack
 
-    - name: Run tests without coverage on Windows
+    - name: Run a single file
       if: ${{ matrix.os == 'windows-latest' }}
       shell: msys2 {0}
       run: |
         gfortran single.f90 -o run && ./run
 
-    - name: Run tests without coverage on Windows
+    - name: Install fpm
+      if: ${{ matrix.os == 'windows-latest' }}
+      shell: msys2 {0}
+      run: |
+        gfortran single.f90 -o run && ./run
+        wget https://github.com/fortran-lang/fpm/archive/refs/heads/main.zip
+        unzip main.zip
+        cd fpm-main
+        ./install
+
+    - name: Run with fpm
       if: ${{ matrix.os == 'windows-latest' }}
       shell: msys2 {0}
       run: |
