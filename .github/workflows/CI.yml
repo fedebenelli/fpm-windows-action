@@ -48,7 +48,6 @@ jobs:
         unzip main.zip
         cd fpm-main
         ls
-        chmod +x ./install
         ./install
 
     - name: Run with fpm
