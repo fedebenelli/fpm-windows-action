@@ -24,17 +24,17 @@ jobs:
 
     - uses: cygwin/cygwin-install-action@master # Install Cygwin
       with:
-        packages: git make gcc gcc-fortran lapack
+        packages: git make gcc gcc-fortran lapack wget
 
-#    - name: Run a single file
-#      if: ${{ matrix.os == 'windows-latest' }}
-#      shell: bash
-#      run: |
-#        gfortran single.f90 -o run && ./run
+    - name: Run a single file
+      if: ${{ matrix.os == 'windows-latest' }}
+      shell: C:\cygwin64\bin\bash.exe --login '{0}'
+      run: |
+        gfortran single.f90 -o run && ./run
 
     - name: Install fpm
       if: ${{ matrix.os == 'windows-latest' }}
-      shell: bash
+      shell: C:\cygwin64\bin\bash.exe --login '{0}'
       run: |
         wget https://github.com/fortran-lang/fpm/archive/refs/heads/main.zip
         unzip main.zip
