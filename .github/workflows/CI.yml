@@ -45,6 +45,10 @@ jobs:
           mingw-w64-x86_64-gcc-fortran
           mingw-w64-x86_64-lapack 
           mingw-w64-x86_64-fpm
+          mingw-w64-x86_64-gcc-libgfortran
+          mingw-w64-x86_64-gcc-libs
+          mingw-w64-x86_64-libwinpthread
+          mingw-w64-x86_64-openblas
 
     - name: Run tests without coverage on Windows
       if: ${{ matrix.os == 'windows-latest' }}
