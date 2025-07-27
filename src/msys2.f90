@@ -1,4 +1,4 @@
-module msys2
+module msys2_mod
   implicit none
   private
 
@@ -7,4 +7,4 @@ contains
   subroutine say_hello
     print *, "Hello, msys2!"
   end subroutine say_hello
-end module msys2
+end module msys2_mod

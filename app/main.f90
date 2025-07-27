@@ -1,5 +1,5 @@
 program main
-  use msys2, only: say_hello
+  use msys2_mod, only: say_hello
   implicit none
 
   call say_hello()
