@@ -22,7 +22,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-
     - uses: cygwin/cygwin-install-action@master # Install Cygwin
       with:
         packages: git make gcc gcc-fortran lapack
