@@ -32,6 +32,7 @@ jobs:
         update: true
         install: >
           git
+          unzip
           mingw-w64-ucrt-x86_64-gcc-fortran
           mingw-w64-ucrt-x86_64-gcc-libgfortran
           mingw-w64-ucrt-x86_64-lapack
@@ -50,6 +51,7 @@ jobs:
         wget https://github.com/fortran-lang/fpm/archive/refs/heads/main.zip
         unzip main.zip
         cd fpm-main
+        chmod +x ./install
         ./install
 
     - name: Run with fpm
