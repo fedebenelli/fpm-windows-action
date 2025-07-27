@@ -30,7 +30,6 @@ jobs:
       if: ${{ matrix.os == 'windows-latest' }}
       shell: bash
       run: |
-        bash --version
         gfortran single.f90 -o run && ./run
 
     - name: Install fpm
