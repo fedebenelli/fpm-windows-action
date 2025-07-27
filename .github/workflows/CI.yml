@@ -1,0 +1,53 @@
+name: CI
+on: [push, pull_request, release]
+
+
+jobs:
+  tests_and_coverage:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        python-version: [3.9]
+        toolchain:
+          - {compiler: gcc, version: 10}
+          - {compiler: gcc, version: 14}
+          - {compiler: intel, version: '2024.2'}
+          # - {compiler: intel, version: '2023.2'}
+        exclude:
+          - os: windows-latest
+            toolchain: {compiler: gcc, version: 14}
+          - os: windows-latest
+            toolchain: {compiler: "intel", version: '2024.2'}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: false
+
+    - name: Install Python
+      uses: actions/setup-python@v1 
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Setup Graphviz
+      uses: ts-graphviz/setup-graphviz@v1
+
+    - name: Set up MSYS2
+      if: ${{ matrix.os == 'windows-latest' }}
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: mingw64
+        update: true
+        install: >
+          git
+          mingw-w64-x86_64-gcc-fortran
+          mingw-w64-x86_64-lapack 
+          mingw-w64-x86_64-fpm
+
+    - name: Run tests without coverage on Windows
+      if: ${{ matrix.os == 'windows-latest' }}
+      shell: msys2 {0}
+      run: |
+        fpm test --profile release --flag "-g" --c-compiler gcc
