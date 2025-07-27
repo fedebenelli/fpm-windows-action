@@ -35,7 +35,7 @@ jobs:
     - name: Download fpm
       if: ${{ matrix.os == 'windows-latest' }}
       shell: bash -o igncr
-      run: >-
+      run: |
         wget https://github.com/fortran-lang/fpm/archive/refs/heads/main.zip
         unzip main.zip
         cd fpm-main
