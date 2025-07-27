@@ -10,16 +10,6 @@ jobs:
       matrix:
         os: [windows-latest]
         python-version: [3.9]
-        toolchain:
-          - {compiler: gcc, version: 10}
-          - {compiler: gcc, version: 14}
-          - {compiler: intel, version: '2024.2'}
-          # - {compiler: intel, version: '2023.2'}
-        exclude:
-          - os: windows-latest
-            toolchain: {compiler: gcc, version: 14}
-          - os: windows-latest
-            toolchain: {compiler: "intel", version: '2024.2'}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -54,4 +44,4 @@ jobs:
       if: ${{ matrix.os == 'windows-latest' }}
       shell: msys2 {0}
       run: |
-        fpm test --profile release --flag "-g" --c-compiler gcc --verbose
+        fpm test
