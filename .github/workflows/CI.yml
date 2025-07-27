@@ -28,17 +28,14 @@ jobs:
       if: ${{ matrix.os == 'windows-latest' }}
       uses: msys2/setup-msys2@v2
       with:
-        msystem: mingw64
+        msystem: UCRT64
         update: true
         install: >
           git
-          mingw-w64-x86_64-gcc-fortran
-          mingw-w64-x86_64-lapack 
-          mingw-w64-x86_64-fpm
-          mingw-w64-x86_64-gcc-libgfortran
-          mingw-w64-x86_64-gcc-libs
-          mingw-w64-x86_64-libwinpthread
-          mingw-w64-x86_64-openblas
+          mingw-w64-ucrt-x86_64-fpm
+          mingw-w64-ucrt-gcc-fortran
+          mingw-w64-ucrt-gcc-libgfortran
+          mingw-w64-ucrt-x86_64-lapack
 
     - name: Run tests without coverage on Windows
       if: ${{ matrix.os == 'windows-latest' }}
