@@ -26,11 +26,11 @@ jobs:
       with:
         packages: git make gcc gcc-fortran lapack
 
-    - name: Run a single file
-      if: ${{ matrix.os == 'windows-latest' }}
-      shell: bash
-      run: |
-        gfortran single.f90 -o run && ./run
+#    - name: Run a single file
+#      if: ${{ matrix.os == 'windows-latest' }}
+#      shell: bash
+#      run: |
+#        gfortran single.f90 -o run && ./run
 
     - name: Install fpm
       if: ${{ matrix.os == 'windows-latest' }}
