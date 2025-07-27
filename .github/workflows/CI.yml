@@ -48,7 +48,7 @@ jobs:
         unzip main.zip
         cd fpm-main
         ls
-        ./install
+        ./install.sh
 
     - name: Run with fpm
       if: ${{ matrix.os == 'windows-latest' }}
